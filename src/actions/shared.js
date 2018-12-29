@@ -1,49 +1,57 @@
-import * as API from '../_DATA'
-import { showLoading, hideLoading } from 'react-redux-loading'
+import * as API from "../_DATA";
+import { showLoading, hideLoading } from "react-redux-loading";
 
+const AUTHED_ID = "tylermcginnis";
 
-const AUTHED_ID = 'tylermcginnis'
-
-function getInitialData () {
-  return Promise.all([
-    API._getUsers(),
-    API._getQuestions(),
-  ]).then(([users, polls]) => ({
-    users,
-    polls,
-  }))
+function getInitialData() {
+	return Promise.all([API._getUsers(), API._getQuestions()]).then(
+		([users, polls]) => ({
+			users,
+			polls
+		})
+	);
 }
 
-export function receiveUsers (users) {
+export function handleInitialData() {
+	return dispatch => {
+		dispatch(showLoading());
+		return getInitialData().then(({ users, polls }) => {
+			dispatch(setAuthedUser(AUTHED_ID));
+			dispatch(receiveUsers(users));
+			dispatch(receivePolls(polls));
+			dispatch(switchTab("unanswered"));
+			dispatch(hideLoading());
+		});
+	};
+}
+
+export function receiveUsers(users) {
 	return {
-     type:  "RECIEVE_USERS",
-      users
-    }
+		type: "RECIEVE_USERS",
+		users
+	};
 }
 
-export function handleInitialData () {
-  return (dispatch) => {
-    dispatch(showLoading())
-    return getInitialData()
-      .then(({ users, polls }) => {
-        dispatch(receiveUsers(users))
-        dispatch(receivePolls(polls))
-        dispatch(setAuthedUser(AUTHED_ID))
-        dispatch(hideLoading())
-      })
-  }
-}
 
-export function receivePolls(polls){
+export function receivePolls(polls) {
 	return {
-     type:  'RECIEVE_POLLS',
-      polls
-    }
+		type: "RECIEVE_POLLS",
+		polls
+	};
 }
 
-export function setAuthedUser(id){
+export function setAuthedUser(id) {
 	return {
-     type:  'SET_AUTH_USER',
-      id
-    }
+		type: "SET_AUTHED_USER",
+		id
+	};
+}
+
+export function switchTab(tab) {
+	return dispatch => {
+		dispatch({
+			type: "SET_SELECTED_TAB",
+			tab
+		});
+	};
 }

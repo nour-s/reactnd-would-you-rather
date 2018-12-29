@@ -1,0 +1,26 @@
+.pollList {
+	width: 400px;
+	margin: 0 auto;
+
+	.tab-selector {
+		width: 100%;
+
+		a {
+			text-transform: none;
+			width: calc(50% - 10px - 2px - 3px);
+			display: inline-block;
+			text-decoration: none;
+			color: #000;
+			border: 1px solid #eee;
+			padding: 5px;
+			text-align: center;
+			border-radius: 3px;
+			margin-right: 3px;
+			cursor: pointer;
+
+			&.selected {
+				border: 1px solid #eb6;
+			}
+		}
+	}
+}

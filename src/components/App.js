@@ -1,44 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { handleInitialData } from '../actions/shared'
-import Poll from '../components/Poll';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { handleInitialData } from "../actions/shared";
+import PollList from "../components/PollList";
 
 let state = {
-  auth:{
-    userId:""
-  },
-  polls : [],
-  users: [],
-  ui: {
-	selectedFilter : "unanswered",
-  }
-}
-
+	authedUser: {
+		id: ""
+	},
+	polls: {},
+	users: {},
+	ui: {
+		selectedTab: "unanswered"
+	}
+};
 
 class App extends Component {
-  
-componentDidMount() {
-  this.props.dispatch(handleInitialData());
-}
-  
-  render() {
-    const polls = this.props.polls;
-    return (
-      <div>
-		<h1>Polls</h1>
-      {Object.keys(polls).map(k=><Poll poll={polls[k]}/>)}
-      </div>
-    );
-  }
+	componentDidMount() {
+		this.props.dispatch(handleInitialData());
+	}
+
+	render() {
+		return <PollList />;
+	}
 }
 
-
-
-function mapStateToProps ({ users, polls }) {
-  return {
-    users,
-    polls
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
