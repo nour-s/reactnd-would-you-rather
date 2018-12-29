@@ -7,8 +7,9 @@ import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import users from './reducers/users';
 import polls from './reducers/polls';
-import thunk from 'redux-thunk'
-import logger from './middlewares/logger'
+import thunk from 'redux-thunk';
+import logger from './middlewares/logger';
+import './scss/main.scss';
 
 import { applyMiddleware } from 'redux'
 
