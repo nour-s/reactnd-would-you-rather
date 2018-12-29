@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared'
+import Poll from '../components/Poll';
 
 let state = {
   auth:{
@@ -21,10 +22,11 @@ componentDidMount() {
 }
   
   render() {
+    const polls = this.props.polls;
     return (
       <div>
-		<h1>Users</h1>
-      {Object.keys(this.props.users).map(i=><h3>{i}</h3>)}
+		<h1>Polls</h1>
+      {Object.keys(polls).map(k=><Poll poll={polls[k]}/>)}
       </div>
     );
   }
@@ -32,9 +34,10 @@ componentDidMount() {
 
 
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users, polls }) {
   return {
-    users
+    users,
+    polls
   }
 }
 

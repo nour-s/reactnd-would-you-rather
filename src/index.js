@@ -8,11 +8,13 @@ import { combineReducers } from 'redux';
 import users from './reducers/users';
 import polls from './reducers/polls';
 import thunk from 'redux-thunk'
+import logger from './middlewares/logger'
 
 import { applyMiddleware } from 'redux'
 
 let middleware = applyMiddleware(
   thunk,
+  logger
 )
 var reducer = combineReducers(
   {
