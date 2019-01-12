@@ -17,9 +17,9 @@ export function handleInitialData() {
 		dispatch(showLoading());
 		return getInitialData().then(({ users, polls }) => {
 			dispatch(setAuthedUser(AUTHED_ID));
+			dispatch(switchTab("unanswered"));
 			dispatch(receiveUsers(users));
 			dispatch(receivePolls(polls));
-			dispatch(switchTab("unanswered"));
 			dispatch(hideLoading());
 		});
 	};
@@ -31,7 +31,6 @@ export function receiveUsers(users) {
 		users
 	};
 }
-
 
 export function receivePolls(polls) {
 	return {
@@ -52,6 +51,16 @@ export function switchTab(tab) {
 		dispatch({
 			type: "SET_SELECTED_TAB",
 			tab
+		});
+	};
+}
+
+export function voteForOption(voteInfo) {
+	return (dispatch, getState) => {
+		const userId = getState().authedUser.id;
+		dispatch({
+			type: "VOTE_FOR_OPTION",
+			voteInfo: { ...voteInfo, userId }
 		});
 	};
 }

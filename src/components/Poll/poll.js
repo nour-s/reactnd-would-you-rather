@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import "./poll.scss";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { voteForOption } from "../../actions/shared";
 
 class Poll extends Component {
+	handleAnswerClick = answer => {
+		this.props.voteForOption({ pollId: this.props.poll.id, answer });
+	};
+
 	render() {
 		const poll = this.props.poll || {};
 
@@ -12,11 +19,28 @@ class Poll extends Component {
 					<img src="images/avatar.png" alt="avatar" />
 					<span>{poll.author}</span>
 				</div>
-				<div className="answer">{poll.optionOne.text}</div>
-				<div className="answer">{poll.optionTwo.text}</div>
+				<button
+					onClick={() => this.handleAnswerClick(1)}
+					className="answer"
+				>
+					{poll.optionOne.text}
+				</button>
+				<button
+					onClick={() => this.handleAnswerClick(2)}
+					className="answer"
+				>
+					{poll.optionTwo.text}
+				</button>
 			</div>
 		);
 	}
 }
 
-export default Poll;
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ voteForOption }, dispatch);
+}
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(Poll);

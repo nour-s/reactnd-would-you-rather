@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Poll from "../components/Poll";
+import Poll from "./poll";
 import "./pollList.scss";
-import { switchTab } from "../actions/shared";
+import { switchTab } from "../../actions/shared";
 
 class PollList extends Component {
 	handleTabClick = tab => {
@@ -28,12 +28,14 @@ class PollList extends Component {
 						p.optionOne.votes.indexOf(userId) >= 0 ||
 						p.optionTwo.votes.indexOf(userId) >= 0
 				);
-				break;
+			default:
+				return [];
 		}
 	};
 
 	render() {
 		const { ui } = this.props;
+		console.log("ui.selectedTab ", ui.selectedTab);
 		const polls = this.getFilteredPolls(ui.selectedTab) || [];
 		return (
 			<div className="pollList">

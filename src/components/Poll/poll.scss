@@ -33,11 +33,13 @@
 	}
 
 	.answer {
+		cursor: pointer;
 		float: left;
 		width: 31%;
 		height: 100%;
 		padding: 5px;
 		border: 1px solid #eee;
 		margin: 0 7px 0 0;
+		background-color: #fff;
 	}
 }

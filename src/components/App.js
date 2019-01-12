@@ -1,18 +1,10 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
-import PollList from "../components/PollList";
-
-let state = {
-	authedUser: {
-		id: ""
-	},
-	polls: {},
-	users: {},
-	ui: {
-		selectedTab: "unanswered"
-	}
-};
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import LoadingBar from "react-redux-loading";
+import PollList from "../components/Poll/pollList";
+import Nav from "./Nav";
 
 class App extends Component {
 	componentDidMount() {
@@ -20,7 +12,15 @@ class App extends Component {
 	}
 
 	render() {
-		return <PollList />;
+		return (
+			<Router>
+				<Fragment>
+					{/* <LoadingBar /> */}
+					<Nav />
+					<Route path="/" exact component={PollList} />
+				</Fragment>
+			</Router>
+		);
 	}
 }
 
