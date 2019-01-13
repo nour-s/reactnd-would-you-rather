@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Poll from "./poll";
+import Poll, { PollViewMode } from "./poll";
 import "./pollList.scss";
 import { switchTab } from "../../actions/shared";
 
@@ -35,7 +35,6 @@ class PollList extends Component {
 
 	render() {
 		const { ui } = this.props;
-		console.log("ui.selectedTab ", ui.selectedTab);
 		const polls = this.getFilteredPolls(ui.selectedTab) || [];
 		return (
 			<div className="pollList">
@@ -58,7 +57,7 @@ class PollList extends Component {
 					</a>
 				</div>
 				{polls.map(p => (
-					<Poll key={p.id} poll={p} />
+					<Poll viewMode={PollViewMode.Preview} key={p.id} poll={p} />
 				))}
 			</div>
 		);
