@@ -27,7 +27,7 @@ class Poll extends Component {
 					<img src="/images/avatar.png" alt="avatar" />
 					<span>{poll.author}</span>
 				</div>
-				{viewMode == PollViewMode.Preview && (
+				{viewMode === PollViewMode.Preview && (
 					<p>{poll.optionOne.text}</p>
 				)}
 				{!isAnswered && (
@@ -72,7 +72,7 @@ class Poll extends Component {
 						</div>
 					</Fragment>
 				)}
-				{viewMode == PollViewMode.Preview && (
+				{viewMode === PollViewMode.Preview && (
 					<Link href="#" to={`/questions/${poll.id}`}>
 						View Poll
 					</Link>

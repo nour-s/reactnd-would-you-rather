@@ -39,22 +39,22 @@ class PollList extends Component {
 		return (
 			<div className="pollList">
 				<div className="tab-selector">
-					<a
+					<button
 						className={
 							ui.selectedTab === "unanswered" ? "selected" : ""
 						}
 						onClick={() => this.handleTabClick("unanswered")}
 					>
 						Unanswered
-					</a>
-					<a
+					</button>
+					<button
 						className={
 							ui.selectedTab === "answered" ? "selected" : ""
 						}
 						onClick={() => this.handleTabClick("answered")}
 					>
 						Answered
-					</a>
+					</button>
 				</div>
 				{polls.map(p => (
 					<Poll viewMode={PollViewMode.Preview} key={p.id} poll={p} />

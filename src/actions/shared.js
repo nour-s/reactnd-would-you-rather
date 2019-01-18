@@ -64,3 +64,31 @@ export function voteForOption(voteInfo) {
 		});
 	};
 }
+
+export function addNewPoll({ optionOne, optionTwo }) {
+	return (dispatch, getState) => {
+		const id = [...Array(22)]
+			.map(i => (~~(Math.random() * 36)).toString(36))
+			.join("");
+
+		let poll = {
+			id,
+			timestamp: +Date.now(),
+			author: getState().authedUser.id,
+			optionOne: {
+				text: optionOne,
+				votes: []
+			},
+			optionTwo: {
+				text: optionTwo,
+				votes: []
+			}
+		};
+
+		dispatch({
+			type: "ADD_NEW_POLL",
+			poll
+		});
+		return poll;
+	};
+}
