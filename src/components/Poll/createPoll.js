@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addNewPoll } from "../../actions/shared";
+import './createPoll.scss'
 
 class CreatePoll extends Component {
 	state = {
@@ -22,7 +23,7 @@ class CreatePoll extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		let poll = this.props.addNewPoll(this.state.poll);
+		this.props.addNewPoll(this.state.poll);
 		this.props.history.push(`/`);
 	}
 
