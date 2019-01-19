@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // import LoadingBar from "react-redux-loading";
 import PollList from "../components/Poll/pollList";
 import Poll from "../components/Poll/poll";
+import LeaderBoard from "../components/LeaderBoard/leaderBoard"
 import CreatePoll from "../components/Poll/createPoll";
 import Nav from "./Nav";
 
@@ -30,6 +31,7 @@ class App extends Component {
 							) : null
 						}
 					/>
+					<Route path="/leaderboard" exact component={LeaderBoard} />
 					<Route path="/" exact component={PollList} />
 				</Fragment>
 			</Router>
