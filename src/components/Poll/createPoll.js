@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addNewPoll } from "../../actions/shared";
-import './createPoll.scss'
+import "./createPoll.scss";
 
 class CreatePoll extends Component {
 	state = {
@@ -48,7 +48,7 @@ class CreatePoll extends Component {
 						onChange={this.handleChangeOptionTwo.bind(this)}
 					/>
 					<br />
-					<input type="submit" value="Submit" />
+					<button>Submit</button>
 				</form>
 			</div>
 		);

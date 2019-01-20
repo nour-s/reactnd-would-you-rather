@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // import LoadingBar from "react-redux-loading";
 import PollList from "../components/Poll/pollList";
 import Poll from "../components/Poll/poll";
-import LeaderBoard from "../components/LeaderBoard/leaderBoard"
+import LeaderBoard from "../components/LeaderBoard/leaderBoard";
 import CreatePoll from "../components/Poll/createPoll";
 import Nav from "./Nav";
+import Login from "../components/login";
 
 class App extends Component {
 	componentDidMount() {
@@ -21,7 +22,13 @@ class App extends Component {
 			<Router>
 				<Fragment>
 					{/* <LoadingBar /> */}
-					<Nav />
+					<Nav
+						loggedUser={
+							this.props.authedUser
+								? this.props.authedUser.id
+								: ""
+						}
+					/>
 					<Route path="/add" exact component={CreatePoll} />
 					<Route
 						path="/questions/:id"
@@ -32,6 +39,7 @@ class App extends Component {
 						}
 					/>
 					<Route path="/leaderboard" exact component={LeaderBoard} />
+					<Route path="/login" exact component={Login} />
 					<Route path="/" exact component={PollList} />
 				</Fragment>
 			</Router>
