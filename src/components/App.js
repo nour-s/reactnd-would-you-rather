@@ -7,6 +7,7 @@ import PollList from "../components/Poll/pollList";
 import Poll from "../components/Poll/poll";
 import LeaderBoard from "../components/LeaderBoard/leaderBoard";
 import CreatePoll from "../components/Poll/createPoll";
+import PrivateRoute from "../components/PrivateRoute";
 import Nav from "./Nav";
 import Login from "../components/login";
 
@@ -29,8 +30,8 @@ class App extends Component {
 								: ""
 						}
 					/>
-					<Route path="/add" exact component={CreatePoll} />
-					<Route
+					<PrivateRoute path="/add" exact component={CreatePoll} />
+					<PrivateRoute
 						path="/questions/:id"
 						render={props =>
 							polls[props.match.params.id] ? (
@@ -38,9 +39,9 @@ class App extends Component {
 							) : null
 						}
 					/>
-					<Route path="/leaderboard" exact component={LeaderBoard} />
+					<PrivateRoute path="/leaderboard" exact component={LeaderBoard} />
+					<PrivateRoute path="/" exact component={PollList} />
 					<Route path="/login" exact component={Login} />
-					<Route path="/" exact component={PollList} />
 				</Fragment>
 			</Router>
 		);

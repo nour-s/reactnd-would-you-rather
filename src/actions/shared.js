@@ -1,7 +1,7 @@
 import * as API from "../_DATA";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-const AUTHED_ID = "tylermcginnis";
+// const AUTHED_ID = "tylermcginnis";
 
 function getInitialData() {
 	return Promise.all([API._getUsers(), API._getQuestions()]).then(
@@ -16,7 +16,7 @@ export function handleInitialData() {
 	return dispatch => {
 		dispatch(showLoading());
 		return getInitialData().then(({ users, polls }) => {
-			dispatch(setAuthedUser(AUTHED_ID));
+			// dispatch(setAuthedUser(AUTHED_ID));
 			dispatch(switchTab("unanswered"));
 			dispatch(receiveUsers(users));
 			dispatch(receivePolls(polls));
