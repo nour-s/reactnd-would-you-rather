@@ -29,11 +29,12 @@ const initState = {
 const store = createStore(reducer, initState, middleware);
 
 // Whenver the authenticated user is changed, we save it in the local storage.
-store.subscribe(
-	() =>
-		store.getState().authedUser.id &&
-		localStorage.setItem("AUTHED_USER", store.getState().authedUser.id)
-);
+store.subscribe(() => {
+	const { id } = store.getState().authedUser;
+	id
+		? localStorage.setItem("AUTHED_USER", id)
+		: localStorage.removeItem("AUTHED_USER");
+});
 
 ReactDOM.render(
 	<Provider store={store}>

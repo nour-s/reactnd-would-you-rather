@@ -1,8 +1,7 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import LoadingBar from "react-redux-loading";
 import PollList from "../components/Poll/pollList";
 import Poll from "../components/Poll/poll";
 import LeaderBoard from "../components/LeaderBoard/leaderBoard";
@@ -16,19 +15,30 @@ class App extends Component {
 		this.props.dispatch(handleInitialData());
 	}
 
+	handleLogoutClick = e => {
+		this.props.dispatch({ type: "SET_AUTHED_USER" });
+	};
+
 	render() {
 		const polls = this.props.polls || {};
+		const user = this.props.authedUser;
 		return (
 			<Router>
-				<Fragment>
+				<div className="app">
 					{/* <LoadingBar /> */}
-					<Nav
-						loggedUser={
-							this.props.authedUser
-								? this.props.authedUser.id
-								: ""
-						}
-					/>
+					<header>
+						<Nav />
+						<div className="header_user">
+							{user.id && `Logged: ${user.id}` && (
+								<button
+									className="header_logout"
+									onClick={this.handleLogoutClick}
+								>
+									Logout
+								</button>
+							)}
+						</div>
+					</header>
 					<PrivateRoute path="/add" exact component={CreatePoll} />
 					<PrivateRoute
 						path="/questions/:id"
@@ -38,19 +48,18 @@ class App extends Component {
 							) : null
 						}
 					/>
-					<PrivateRoute path="/leaderboard" exact component={LeaderBoard} />
+					<PrivateRoute
+						path="/leaderboard"
+						exact
+						component={LeaderBoard}
+					/>
 					<PrivateRoute path="/" exact component={PollList} />
 					<Route path="/login" exact component={Login} />
-				</Fragment>
+				</div>
 			</Router>
 		);
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		...state
-	};
-};
-
+const mapStateToProps = state => state;
 export default connect(mapStateToProps)(App);

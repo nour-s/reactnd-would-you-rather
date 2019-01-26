@@ -26,14 +26,8 @@ export default class Nav extends React.Component {
 								Leader Board
 							</NavLink>
 						</li>
-						<li>
-							<NavLink to="/login" exact activeClassName="active">
-								Login
-							</NavLink>
-						</li>
 					</ul>
 				</nav>
-				<div>{JSON.stringify(this.props.loggedUser)}</div>
 			</React.Fragment>
 		);
 	}
