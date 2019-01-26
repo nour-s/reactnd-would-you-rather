@@ -18,7 +18,6 @@ class App extends Component {
 
 	render() {
 		const polls = this.props.polls || {};
-
 		return (
 			<Router>
 				<Fragment>

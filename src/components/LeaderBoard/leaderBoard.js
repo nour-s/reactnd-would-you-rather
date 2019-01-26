@@ -15,9 +15,9 @@ class LeaderBoard extends Component {
 				(user1.answCount + user1.quesCount)
 			);
 		});
-		
+
 		return users.map(user => (
-			<div className="user_stats">
+			<div key={`user_${user.id}`} className="user_stats">
 				<img
 					className="user_stats-left"
 					src="/images/avatar.png"

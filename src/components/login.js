@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { setAuthedUser } from "../actions/shared";
 import "./login.scss";
@@ -7,7 +8,8 @@ import "./login.scss";
 class Login extends Component {
 	state = {
 		selectedUser: "",
-		showError: false
+		showError: false,
+		isAuthorized: false
 	};
 
 	handleSubmit = e => {
@@ -18,7 +20,7 @@ class Login extends Component {
 			return;
 		}
 		this.props.setAuthedUser(this.state.selectedUser);
-		this.props.history.push(`/`);
+		this.setState(prevState => ({ ...prevState, isAuthorized: true }));
 	};
 
 	handleChange = e => {
@@ -26,6 +28,12 @@ class Login extends Component {
 	};
 
 	render() {
+		const { from } = this.props.location.state || { from: { pathname: '/' } }
+
+		if (this.state.isAuthorized) {
+			return <Redirect to={from} />
+		}
+
 		let users = Object.keys(this.props.users).map(
 			uid => this.props.users[uid]
 		);
