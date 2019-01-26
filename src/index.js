@@ -12,17 +12,28 @@ import ui from "./reducers/ui";
 import thunk from "redux-thunk";
 import logger from "./middlewares/logger";
 import "./scss/main.scss";
-
 import { applyMiddleware } from "redux";
 
-let middleware = applyMiddleware(thunk, logger);
-let reducer = combineReducers({
+const middleware = applyMiddleware(thunk, logger);
+const reducer = combineReducers({
 	authedUser,
 	users,
 	polls,
 	ui
 });
-let store = createStore(reducer, middleware);
+
+const initState = {
+	authedUser: { id: localStorage.getItem("AUTHED_USER") }
+};
+
+const store = createStore(reducer, initState, middleware);
+
+// Whenver the authenticated user is changed, we save it in the local storage.
+store.subscribe(
+	() =>
+		store.getState().authedUser.id &&
+		localStorage.setItem("AUTHED_USER", store.getState().authedUser.id)
+);
 
 ReactDOM.render(
 	<Provider store={store}>
