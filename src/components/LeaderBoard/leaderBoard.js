@@ -11,7 +11,8 @@ class LeaderBoard extends Component {
 		}));
 		users = users.sort(function(user1, user2) {
 			return (
-				(user2.answCount +user2.quesCount) -
+				user2.answCount +
+				user2.quesCount -
 				(user1.answCount + user1.quesCount)
 			);
 		});
@@ -20,7 +21,7 @@ class LeaderBoard extends Component {
 			<div key={`user_${user.id}`} className="user_stats">
 				<img
 					className="user_stats-left"
-					src="/images/avatar.png"
+					src={user.avatarURL}
 					alt="avatar"
 				/>
 				<h2>{user.name}</h2>

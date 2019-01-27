@@ -30,9 +30,9 @@ body {
 header {
 	display: flex;
 	height: 50px;
-    margin: 0 0 15px 0;
+	margin: 0 0 15px 0;
 	border-bottom: 1px solid;
-	
+
 	.header_user {
 		flex: 25%;
 		display: flex;
@@ -64,6 +64,24 @@ nav {
 		display: block;
 	}
 
+	a {
+		text-decoration: none;
+		height: calc(100% - 2px);
+		display: block;
+		text-align: center;
+		width: 115px;
+
+		&:visited {
+			color: unset;
+		}
+
+		&.active {
+			color: #069;
+			font-weight: 600;
+			border-bottom: 1px solid #069;
+		}
+	}
+
 	ul {
 		display: flex;
 		padding: 0;
@@ -74,8 +92,5 @@ nav {
 		float: left;
 		list-style-type: none;
 		margin: 0 10px 0 0;
-		a {
-			text-decoration: none;
-		}
 	}
 }
