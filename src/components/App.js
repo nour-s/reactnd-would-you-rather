@@ -9,6 +9,7 @@ import CreatePoll from "../components/Poll/createPoll";
 import PrivateRoute from "../components/PrivateRoute";
 import Nav from "./Nav";
 import Login from "../components/login";
+import UserSummary from "./userSummary";
 
 class App extends Component {
 	componentDidMount() {
@@ -19,32 +20,47 @@ class App extends Component {
 		this.props.dispatch({ type: "SET_AUTHED_USER" });
 	};
 
+	userProfile = user => {
+		if (!user) return null;
+		return (
+			<div className="header_user">
+				<UserSummary user={user} />
+				<button
+					className="header_logout"
+					onClick={this.handleLogoutClick}
+				>
+					Logout
+				</button>
+			</div>
+		);
+	};
+
 	render() {
-		const polls = this.props.polls || {};
-		const user = this.props.authedUser;
+		const { polls, users, authedUser } = this.props;
+		const user = users[authedUser.id];
 		return (
 			<Router>
 				<div className="app">
 					{/* <LoadingBar /> */}
 					<header>
 						<Nav />
-						<div className="header_user">
-							{user.id && `Logged: ${user.id}` && (
-								<button
-									className="header_logout"
-									onClick={this.handleLogoutClick}
-								>
-									Logout
-								</button>
-							)}
-						</div>
+						{this.userProfile(user)}
 					</header>
 					<PrivateRoute path="/add" exact component={CreatePoll} />
 					<PrivateRoute
 						path="/questions/:id"
 						render={props =>
 							polls[props.match.params.id] ? (
-								<Poll poll={polls[props.match.params.id]} />
+								<Poll
+									poll={{
+										...polls[props.match.params.id],
+										user:
+											users[
+												polls[props.match.params.id]
+													.author
+											]
+									}}
+								/>
 							) : null
 						}
 					/>
@@ -61,5 +77,9 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = ({ users, polls, authedUser }) => ({
+	users,
+	polls,
+	authedUser
+});
 export default connect(mapStateToProps)(App);

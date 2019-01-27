@@ -5,41 +5,51 @@
 	max-width: 400px;
 	margin: 10px auto;
 	padding: 9px;
+	display: flex;
+	flex-wrap: wrap;
 
-	&::after {
-		content: " ";
-		display: block;
-		height: 0;
-		clear: both;
-	}
 
 	h2 {
 		margin: 0 0 5px 10px;
+		flex-basis: 100%;
 	}
 
-	.author-info {
-		float: left;
+	.poll_author {
+		flex-basis: 22%;
+		display: inline-block;
+	}
 
-		img {
-			width: 60px;
-			margin: 0px 10px;
-		}
+	.poll_details {
+		flex-basis: 60%;
+	}
 
-		span {
-			display: block;
-			width: 100%;
-			text-align: center;
+	.poll_view-link {
+		text-decoration: none;
+		padding: 3px;
+		text-align: center;
+		width: 50%;
+		display: block;
+		color: #334b53;
+		border-radius: 5px;
+		margin: 0 auto;
+		border: 1px solid #222;
+		&:hover {
+			border-color: #fff;
+			background-color: #334b53;
+			color: #fff;
 		}
 	}
 
 	.answer {
 		cursor: pointer;
-		float: left;
-		width: 31%;
-		height: 100%;
+		width: 100%;
 		padding: 5px;
 		border: 1px solid #eee;
-		margin: 0 7px 0 0;
+		margin: 0 7px 5px 0;
 		background-color: #fff;
+
+		&:hover {
+			border-color: #00f;
+		}
 	}
 }

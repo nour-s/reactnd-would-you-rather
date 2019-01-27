@@ -34,7 +34,7 @@ class PollList extends Component {
 	};
 
 	render() {
-		const { ui } = this.props;
+		const { ui, users } = this.props;
 		const polls = this.getFilteredPolls(ui.selectedTab) || [];
 		return (
 			<div className="pollList">
@@ -56,17 +56,19 @@ class PollList extends Component {
 						Answered
 					</button>
 				</div>
-				{polls.map(p => (
-					<Poll viewMode={PollViewMode.Preview} key={p.id} poll={p} />
+				{polls.map(poll => (
+					<Poll
+						viewMode={PollViewMode.Preview}
+						key={poll.id}
+						poll={{ ...poll, user: users[poll.author] }}
+					/>
 				))}
 			</div>
 		);
 	}
 }
 
-function mapStateToProps({ authedUser, polls, ui }) {
-	return { authedUser, polls, ui };
-}
+const mapStateToProps = state => state;
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(

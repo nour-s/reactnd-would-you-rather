@@ -5,11 +5,42 @@ body {
 	font-size: 14px;
 }
 
+.app {
+	width: 600px;
+	margin: 10px auto;
+
+	.author-info {
+		flex-wrap: wrap;
+		display: flex;
+		align-items: center;
+		padding: 10px;
+
+		span {
+			text-align: center;
+			font-size: 12px;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+}
+
 header {
 	display: flex;
+	height: 50px;
+
 	.header_user {
-		flex: 40%;
+		flex: 10%;
+		display: flex;
+		.author-info {
+			img {
+				height: 40px;
+			}
+		}
 	}
+
 	.header_logout {
 		background: none !important;
 		border: none;
@@ -19,11 +50,6 @@ header {
 		text-decoration: underline;
 		cursor: pointer;
 	}
-}
-
-.app {
-	width: 960px;
-	margin: 10px auto;
 }
 
 nav {
