@@ -30,9 +30,9 @@ class CreatePoll extends Component {
 	render() {
 		let { poll } = this.state;
 		return (
-			<div className="poll">
-				<h1>New Question</h1>
-				<h3>Would you rather:</h3>
+			<div className="create-poll">
+				<h1 className="create-poll_title">New Question</h1>
+				<h3 className="create-poll_subtitle">Would you rather:</h3>
 				<form onSubmit={this.handleSubmit.bind(this)}>
 					<input
 						id="optionOne"
@@ -48,7 +48,7 @@ class CreatePoll extends Component {
 						onChange={this.handleChangeOptionTwo.bind(this)}
 					/>
 					<br />
-					<button>Submit</button>
+					<button className="create-poll_submit">Submit</button>
 				</form>
 			</div>
 		);
