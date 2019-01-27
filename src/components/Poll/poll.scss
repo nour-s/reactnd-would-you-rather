@@ -8,7 +8,6 @@
 	display: flex;
 	flex-wrap: wrap;
 
-
 	h2 {
 		margin: 0 0 5px 10px;
 		flex-basis: 100%;
@@ -41,15 +40,22 @@
 	}
 
 	.answer {
-		cursor: pointer;
 		width: 100%;
 		padding: 5px;
 		border: 1px solid #eee;
 		margin: 0 7px 5px 0;
 		background-color: #fff;
+		border-radius: 5px;
 
-		&:hover {
-			border-color: #00f;
+		&.answer_clickable {
+			cursor: pointer;
+			&:hover {
+				border-color: #00f;
+			}
+		}
+
+		&.selected {
+			border: 2px solid #f90;
 		}
 	}
 }

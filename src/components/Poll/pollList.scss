@@ -5,7 +5,7 @@
 	.tab-selector {
 		width: 100%;
 
-		a {
+		button {
 			text-transform: none;
 			width: calc(50% - 10px - 2px - 3px);
 			display: inline-block;
@@ -16,10 +16,11 @@
 			text-align: center;
 			border-radius: 3px;
 			margin-right: 3px;
+			background-color: #fff;
 			cursor: pointer;
 
 			&.selected {
-				border: 1px solid #eb6;
+				border: 2px solid #eb6;
 			}
 		}
 	}

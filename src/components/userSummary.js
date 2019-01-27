@@ -1,9 +1,9 @@
 import React from "react";
 
-const UserSummary = props => (
+const UserSummary = ({ user }) => (
 	<div className="author-info">
-		<img src="/images/avatar.png" alt="avatar" />
-		<span>{props.user.name}</span>
+		<img src={user.avatarURL} alt="avatar" />
+		<span>{user.name}</span>
 	</div>
 );
 

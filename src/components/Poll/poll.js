@@ -16,10 +16,35 @@ class Poll extends Component {
 		this.props.voteForOption({ pollId: this.props.poll.id, answer });
 	};
 
+	answerComponent = (allVotes, vote, isSelectedAnswer) => {
+		return (
+			<div className={`answer ${isSelectedAnswer ? "selected" : ""}`}>
+				<span>{vote.text}</span>
+				<div>Votes: {vote.votes.length}</div>
+				<div>
+					Percentage:
+					{((vote.votes.length * 100) / allVotes.length).toFixed(0)}
+				</div>
+			</div>
+		);
+	};
+
+	optionComponent = (option, answerClicked) => {
+		return (
+			<button onClick={answerClicked} className="answer answer_clickable">
+				{option.text}
+			</button>
+		);
+	};
+
 	render() {
 		const { poll, authedUser, viewMode } = this.props;
 		const allVotes = [...poll.optionOne.votes, ...poll.optionTwo.votes];
-		const isAnswered = allVotes.includes(authedUser);
+		const selectedAnswer = poll.optionOne.votes.includes(authedUser)
+			? poll.optionOne
+			: poll.optionTwo.votes.includes(authedUser)
+			? poll.optionTwo
+			: undefined;
 
 		return (
 			<div className="poll">
@@ -31,50 +56,32 @@ class Poll extends Component {
 					{viewMode === PollViewMode.Preview && (
 						<p>{poll.optionOne.text}</p>
 					)}
-					{!isAnswered && (
+					{!selectedAnswer && (
 						<Fragment>
-							<button
-								onClick={() => this.handleAnswerClick(1)}
-								className="answer"
-							>
-								{poll.optionOne.text}
-							</button>
-							<button
-								onClick={() => this.handleAnswerClick(2)}
-								className="answer"
-							>
-								{poll.optionTwo.text}
-							</button>
+							{this.optionComponent(poll.optionOne, () => this.handleAnswerClick(1))}
+							{this.optionComponent(poll.optionTwo, () => this.handleAnswerClick(2))}
 						</Fragment>
 					)}
-					{isAnswered && (
+					{selectedAnswer && (
 						<Fragment>
-							<div className="answer">
-								<span>{poll.optionOne.text}</span>
-								<div>Votes: {poll.optionOne.votes.length}</div>
-								<div>
-									Percentage:
-									{(
-										poll.optionOne.votes.length /
-										allVotes.length
-									).toFixed(2)}
-								</div>
-							</div>
-							<div className="answer">
-								<span>{poll.optionTwo.text}</span>
-								<div>Votes: {poll.optionTwo.votes.length}</div>
-								<div>
-									Percentage:
-									{(
-										poll.optionTwo.votes.length /
-										allVotes.length
-									).toFixed(2)}
-								</div>
-							</div>
+							{this.answerComponent(
+								allVotes,
+								poll.optionOne,
+								poll.optionOne === selectedAnswer
+							)}
+							{this.answerComponent(
+								allVotes,
+								poll.optionTwo,
+								poll.optionTwo === selectedAnswer
+							)}
 						</Fragment>
 					)}
 					{viewMode === PollViewMode.Preview && (
-						<Link href="#" className="poll_view-link" to={`/questions/${poll.id}`}>
+						<Link
+							href="#"
+							className="poll_view-link"
+							to={`/questions/${poll.id}`}
+						>
 							View Poll
 						</Link>
 					)}
