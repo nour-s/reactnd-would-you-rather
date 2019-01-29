@@ -4,10 +4,8 @@ function polls(state = {}, action) {
 			return { ...state, ...action.polls };
 		case "VOTE_FOR_OPTION":
 			let polls = state;
-			let { voteInfo } = action;
-			polls[voteInfo.pollId][
-				voteInfo.answer === 1 ? "optionOne" : "optionTwo"
-			].votes.push(voteInfo.userId);
+			const { question } = action;
+			Object.assign(polls[question.id], question);
 			return { ...polls };
 		case "ADD_NEW_POLL":
 			return { ...state, [action.poll.id]: action.poll };

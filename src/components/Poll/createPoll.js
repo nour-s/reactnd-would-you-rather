@@ -6,18 +6,18 @@ import "./createPoll.scss";
 
 class CreatePoll extends Component {
 	state = {
-		poll: { optionOne: "", optionTwo: "" }
+		poll: { optionOneText: "", optionTwoText: "" }
 	};
 
 	handleChangeOptionOne(e) {
 		this.setState({
-			poll: { ...this.state.poll, optionOne: e.target.value }
+			poll: { ...this.state.poll, optionOneText: e.target.value }
 		});
 	}
 
 	handleChangeOptionTwo(e) {
 		this.setState({
-			poll: { ...this.state.poll, optionTwo: e.target.value }
+			poll: { ...this.state.poll, optionTwoText: e.target.value }
 		});
 	}
 
@@ -37,14 +37,14 @@ class CreatePoll extends Component {
 					<input
 						id="optionOne"
 						placeholder="Enter your option one text"
-						value={poll.optionOne}
+						value={poll.optionOneText}
 						onChange={this.handleChangeOptionOne.bind(this)}
 					/>
 					<hr className="hr-text" data-content="OR" />
 					<input
 						id="optionTwo"
 						placeholder="Enter your option two text"
-						value={poll.optionTwo}
+						value={poll.optionTwoText}
 						onChange={this.handleChangeOptionTwo.bind(this)}
 					/>
 					<br />

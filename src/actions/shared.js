@@ -58,37 +58,36 @@ export function switchTab(tab) {
 export function voteForOption(voteInfo) {
 	return (dispatch, getState) => {
 		const userId = getState().authedUser.id;
-		dispatch({
-			type: "VOTE_FOR_OPTION",
-			voteInfo: { ...voteInfo, userId }
+		const { pollId, answer } = voteInfo;
+		API._saveQuestionAnswer({
+			authedUser: userId,
+			qid: pollId,
+			answer
+		}).then(() => {
+			Promise.all([API._getUsers(), API._getQuestions()]).then(result => {
+				const user = result[0][userId];
+				const question = result[1][pollId];
+				dispatch({
+					type: "VOTE_FOR_OPTION",
+					user,
+					question
+				});
+			});
 		});
 	};
 }
 
-export function addNewPoll({ optionOne, optionTwo }) {
+export function addNewPoll({ optionOneText, optionTwoText }) {
 	return (dispatch, getState) => {
-		const id = [...Array(22)]
-			.map(i => (~~(Math.random() * 36)).toString(36))
-			.join("");
-
-		let poll = {
-			id,
-			timestamp: +Date.now(),
-			author: getState().authedUser.id,
-			optionOne: {
-				text: optionOne,
-				votes: []
-			},
-			optionTwo: {
-				text: optionTwo,
-				votes: []
-			}
-		};
-
-		dispatch({
-			type: "ADD_NEW_POLL",
-			poll
-		});
-		return poll;
+		API._saveQuestion({
+			optionOneText,
+			optionTwoText,
+			author: getState().authedUser.id
+		}).then(poll =>
+			dispatch({
+				type: "ADD_NEW_POLL",
+				poll
+			})
+		);
 	};
 }

@@ -12,8 +12,17 @@ export const PollViewMode = {
 };
 
 class Poll extends Component {
+	state = {
+		disabled: false
+	};
+
 	handleAnswerClick = answer => {
-		this.props.voteForOption({ pollId: this.props.poll.id, answer });
+		let { poll } = this.props;
+		this.props.voteForOption({
+			pollId: poll.id,
+			answer: ["optionOne", "optionTwo"][answer - 1]
+		});
+		this.setState({ disabled: true });
 	};
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
@@ -31,7 +40,11 @@ class Poll extends Component {
 
 	optionComponent = (option, answerClicked) => {
 		return (
-			<button onClick={answerClicked} className="answer answer_clickable">
+			<button
+				disabled={this.state.disabled && "disabled"}
+				onClick={answerClicked}
+				className="answer answer_clickable"
+			>
 				{option.text}
 			</button>
 		);
@@ -58,8 +71,12 @@ class Poll extends Component {
 					)}
 					{!selectedAnswer && (
 						<Fragment>
-							{this.optionComponent(poll.optionOne, () => this.handleAnswerClick(1))}
-							{this.optionComponent(poll.optionTwo, () => this.handleAnswerClick(2))}
+							{this.optionComponent(poll.optionOne, () =>
+								this.handleAnswerClick(1)
+							)}
+							{this.optionComponent(poll.optionTwo, () =>
+								this.handleAnswerClick(2)
+							)}
 						</Fragment>
 					)}
 					{selectedAnswer && (
