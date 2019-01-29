@@ -58,7 +58,11 @@ class PollList extends Component {
 				</div>
 				{polls.map(poll => (
 					<Poll
-						viewMode={PollViewMode.Preview}
+						{...this.props}
+						viewMode={
+							ui.selectedTab === "answered" &&
+							PollViewMode.Preview
+						}
 						key={poll.id}
 						poll={{ ...poll, user: users[poll.author] }}
 					/>

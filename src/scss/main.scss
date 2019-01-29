@@ -3,6 +3,10 @@
 body {
 	font-family: Montserrat, helvetica;
 	font-size: 14px;
+
+	button {
+		font-family: inherit;
+	}
 }
 
 .app {
@@ -14,10 +18,12 @@ body {
 		display: flex;
 		align-items: center;
 		padding: 10px;
+		justify-content: center;
 
 		span {
 			text-align: center;
 			font-size: 12px;
+			padding: 5px 0;
 		}
 
 		img {

@@ -12,27 +12,36 @@ export const PollViewMode = {
 };
 
 class Poll extends Component {
-	state = {
-		disabled: false
-	};
+	constructor(props) {
+		super(props);
+		const { poll, authedUser } = props;
+		this.state = {
+			disabled: false,
+			selectedAnswer: poll.optionOne.votes.includes(authedUser)
+				? poll.optionOne
+				: poll.optionTwo.votes.includes(authedUser)
+				? poll.optionTwo
+				: undefined
+		};
+	}
 
 	handleAnswerClick = answer => {
-		let { poll } = this.props;
+		const { poll } = this.props;
+		answer = ["optionOne", "optionTwo"][answer - 1];
 		this.props.voteForOption({
 			pollId: poll.id,
-			answer: ["optionOne", "optionTwo"][answer - 1]
+			answer
 		});
-		this.setState({ disabled: true });
+		this.setState({ disabled: true, selectedAnswer: answer });
 	};
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
 		return (
 			<div className={`answer ${isSelectedAnswer ? "selected" : ""}`}>
-				<span>{vote.text}</span>
-				<div>Votes: {vote.votes.length}</div>
-				<div>
-					Percentage:
-					{((vote.votes.length * 100) / allVotes.length).toFixed(0)}
+				<div className="answer_text">{vote.text}</div>
+				<div className="answer_details">
+					{vote.votes.length} Votes{" "}
+					{((vote.votes.length * 100) / allVotes.length).toFixed(0)} %
 				</div>
 			</div>
 		);
@@ -43,32 +52,38 @@ class Poll extends Component {
 			<button
 				disabled={this.state.disabled && "disabled"}
 				onClick={answerClicked}
-				className="answer answer_clickable"
+				className="answer"
 			>
 				{option.text}
 			</button>
 		);
 	};
 
+	handlePollClick = e => {
+		this.props.history.push(`/questions/${this.props.poll.id}`);
+	};
+
 	render() {
-		const { poll, authedUser, viewMode } = this.props;
+		const { poll,  viewMode } = this.props;
 		const allVotes = [...poll.optionOne.votes, ...poll.optionTwo.votes];
-		const selectedAnswer = poll.optionOne.votes.includes(authedUser)
-			? poll.optionOne
-			: poll.optionTwo.votes.includes(authedUser)
-			? poll.optionTwo
-			: undefined;
+		const { selectedAnswer } = this.state;
 
 		return (
-			<div className="poll">
+			<div
+				className={[
+					"poll",
+					viewMode === PollViewMode.Preview && "poll--preview"
+				].join(" ")}
+				onClick={
+					viewMode === PollViewMode.Preview &&
+					(e => this.handlePollClick(e))
+				}
+			>
 				<h2>Would you rather</h2>
 				<div className="poll_author">
 					<UserSummary user={poll.user} />
 				</div>
 				<div className="poll_details">
-					{viewMode === PollViewMode.Preview && (
-						<p>{poll.optionOne.text}</p>
-					)}
 					{!selectedAnswer && (
 						<Fragment>
 							{this.optionComponent(poll.optionOne, () =>
@@ -92,15 +107,6 @@ class Poll extends Component {
 								poll.optionTwo === selectedAnswer
 							)}
 						</Fragment>
-					)}
-					{viewMode === PollViewMode.Preview && (
-						<Link
-							href="#"
-							className="poll_view-link"
-							to={`/questions/${poll.id}`}
-						>
-							View Poll
-						</Link>
 					)}
 				</div>
 			</div>

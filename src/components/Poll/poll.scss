@@ -1,12 +1,18 @@
 .poll {
 	min-height: 100px;
-	border: 1px solid #eee;
+	border: 1px solid #006495;
 	border-radius: 8px;
-	max-width: 400px;
 	margin: 10px auto;
 	padding: 9px;
 	display: flex;
 	flex-wrap: wrap;
+
+	&.poll--preview {
+		&:hover {
+			cursor: pointer;
+			border-width: 2px;
+		}
+	}
 
 	h2 {
 		margin: 0 0 5px 10px;
@@ -20,6 +26,7 @@
 
 	.poll_details {
 		flex-basis: 60%;
+		margin: 0 auto;
 	}
 
 	.poll_view-link {
@@ -42,20 +49,32 @@
 	.answer {
 		width: 100%;
 		padding: 5px;
-		border: 1px solid #eee;
-		margin: 0 7px 5px 0;
+		border: 1px solid #006495;
+		margin: 0 7px 10px 0;
 		background-color: #fff;
 		border-radius: 5px;
+		cursor: pointer;
+		font-size: 14px;
+		min-height: 35%;
 
-		&.answer_clickable {
-			cursor: pointer;
-			&:hover {
-				border-color: #00f;
-			}
+		.answer_text {
+			padding: 5px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.answer_details {
+			padding: 5px;
 		}
 
 		&.selected {
-			border: 2px solid #f90;
+			border: 1px solid #f00;
+		}
+	}
+
+	button.answer {
+		&:hover {
+			background-color: #006495;
+			color: #fff;
 		}
 	}
 }
