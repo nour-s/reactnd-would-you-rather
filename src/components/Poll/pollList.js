@@ -7,8 +7,8 @@ import { switchTab } from "../../actions/shared";
 
 class PollList extends Component {
 	state = {
-		newAnswer : false
-	}
+		newAnswer: false
+	};
 
 	handleTabClick = tab => {
 		this.props.switchTab(tab);
@@ -38,8 +38,10 @@ class PollList extends Component {
 	};
 
 	handlePollAnswered = () => {
-		this.setState({ newAnswer : true }, () => setTimeout(()=> this.setState({ newAnswer : false }), 1000));
-	}
+		this.setState({ newAnswer: true }, () =>
+			setTimeout(() => this.setState({ newAnswer: false }), 1000)
+		);
+	};
 
 	render() {
 		const { ui, users } = this.props;
@@ -56,9 +58,9 @@ class PollList extends Component {
 						Unanswered
 					</button>
 					<button
-						className={
-						` ${ ui.selectedTab === "answered" ? "selected" : "" } ${ this.state.newAnswer ? "new-answer" : "" }`
-						}
+						className={` ${
+							ui.selectedTab === "answered" ? "selected" : ""
+						} ${this.state.newAnswer ? "new-answer" : ""}`}
 						onClick={() => this.handleTabClick("answered")}
 					>
 						Answered

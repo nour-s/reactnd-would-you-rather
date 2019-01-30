@@ -20,8 +20,8 @@ class Poll extends Component {
 			selectedAnswer: poll.optionOne.votes.includes(authedUser)
 				? poll.optionOne
 				: poll.optionTwo.votes.includes(authedUser)
-					? poll.optionTwo
-					: undefined
+				? poll.optionTwo
+				: undefined
 		};
 	}
 
@@ -74,11 +74,12 @@ class Poll extends Component {
 				className={[
 					"poll",
 					viewMode === PollViewMode.Preview ? "poll--preview" : "",
-					this.state.disabled ? "answered" : ''
+					this.state.disabled ? "answered" : ""
 				].join(" ")}
 				onClick={
-					viewMode === PollViewMode.Preview ?
-					(e => this.handlePollClick(e)) : null
+					viewMode === PollViewMode.Preview
+						? e => this.handlePollClick(e)
+						: null
 				}
 			>
 				<h2>Would you rather</h2>
