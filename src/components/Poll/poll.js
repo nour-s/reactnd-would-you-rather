@@ -20,8 +20,8 @@ class Poll extends Component {
 			selectedAnswer: poll.optionOne.votes.includes(authedUser)
 				? poll.optionOne
 				: poll.optionTwo.votes.includes(authedUser)
-				? poll.optionTwo
-				: undefined
+					? poll.optionTwo
+					: undefined
 		};
 	}
 
@@ -33,6 +33,7 @@ class Poll extends Component {
 			answer
 		});
 		this.setState({ disabled: true, selectedAnswer: answer });
+		this.props.onPollAnswered();
 	};
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
@@ -64,7 +65,7 @@ class Poll extends Component {
 	};
 
 	render() {
-		const { poll,  viewMode } = this.props;
+		const { poll, viewMode } = this.props;
 		const allVotes = [...poll.optionOne.votes, ...poll.optionTwo.votes];
 		const { selectedAnswer } = this.state;
 
@@ -72,11 +73,12 @@ class Poll extends Component {
 			<div
 				className={[
 					"poll",
-					viewMode === PollViewMode.Preview && "poll--preview"
+					viewMode === PollViewMode.Preview ? "poll--preview" : "",
+					this.state.disabled ? "answered" : ''
 				].join(" ")}
 				onClick={
-					viewMode === PollViewMode.Preview &&
-					(e => this.handlePollClick(e))
+					viewMode === PollViewMode.Preview ?
+					(e => this.handlePollClick(e)) : null
 				}
 			>
 				<h2>Would you rather</h2>

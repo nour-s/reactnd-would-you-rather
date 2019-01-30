@@ -6,6 +6,32 @@
 	padding: 9px;
 	display: flex;
 	flex-wrap: wrap;
+	
+	&:before {
+		content: "";
+		right: 100%;
+	}
+	  
+	&.answered{
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		position: relative;
+		overflow: hidden;
+		&:before {
+		  content: "";
+		  position: absolute;
+		  right: 0;
+		  z-index: -1;
+		  left: 0;
+		  bottom: 0;
+		  background: #2980b9;
+		  height: 4px;
+		  transition-duration: 1.7s;
+		  transition-property: right;
+		  transition-timing-function: ease-out;
+		}
+
+	}
 
 	&.poll--preview {
 		&:hover {

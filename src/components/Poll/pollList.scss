@@ -5,6 +5,29 @@
 		width: 100%;
 
 		button {
+			&:before {
+				content: "";
+				opacity: 1;
+			}
+
+			&.new-answer {
+				&:before {
+					content:'';
+					position: absolute;
+					right:5px;
+					top: 8px;
+					border-radius: 50%;
+					background-color: #006495;
+					height: 10px;
+					width: 10px;
+					opacity: 0;
+
+					transition-duration: 1s;
+					transition-property: opacity;
+					transition-timing-function: ease-out;
+				}
+			}
+
 			text-transform: none;
 			width: calc(50% - 3px);
 			display: inline-block;
@@ -17,6 +40,7 @@
 			margin-right: 3px;
 			background-color: #fff;
 			cursor: pointer;
+			position: relative;
 
 			&.selected {
 				background-color: #006495;
