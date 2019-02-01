@@ -6,11 +6,6 @@ import { voteForOption } from "../../actions/shared";
 import UserSummary from "../userSummary";
 import PropTypes from "prop-types";
 
-export const PollViewMode = {
-	Preview: 0,
-	Normal: 1
-};
-
 export class Poll extends Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +22,7 @@ export class Poll extends Component {
 
 	handleAnswerClick = answer => {
 		const { poll } = this.props;
-		answer = ["optionOne", "optionTwo"][answer - 1];
+		answer = ["optionOne", "optionTwo"][answer];
 		this.props.voteForOption({
 			pollId: poll.id,
 			answer
@@ -65,7 +60,7 @@ export class Poll extends Component {
 	};
 
 	render() {
-		const { poll, viewMode } = this.props;
+		const { poll, isPreview } = this.props;
 		const allVotes = [...poll.optionOne.votes, ...poll.optionTwo.votes];
 		const { selectedAnswer } = this.state;
 
@@ -73,14 +68,10 @@ export class Poll extends Component {
 			<div
 				className={[
 					"poll",
-					viewMode === PollViewMode.Preview ? "poll--preview" : "",
+					isPreview ? "poll--preview" : "",
 					this.state.disabled ? "answered" : ""
 				].join(" ")}
-				onClick={
-					viewMode === PollViewMode.Preview
-						? e => this.handlePollClick(e)
-						: null
-				}
+				onClick={isPreview ? e => this.handlePollClick(e) : null}
 			>
 				<h2>Would you rather</h2>
 				<div className="poll_author">
@@ -90,10 +81,10 @@ export class Poll extends Component {
 					{!selectedAnswer && (
 						<Fragment>
 							{this.optionComponent(poll.optionOne, () =>
-								this.handleAnswerClick(1)
+								this.handleAnswerClick(0)
 							)}
 							{this.optionComponent(poll.optionTwo, () =>
-								this.handleAnswerClick(2)
+								this.handleAnswerClick(1)
 							)}
 						</Fragment>
 					)}
@@ -118,14 +109,14 @@ export class Poll extends Component {
 }
 
 Poll.propTypes = {
-	poll: PropTypes.object.isRequired,
-	authedUser: PropTypes.shape({
-		id: PropTypes.string
-	}).isRequired,
+	poll: PropTypes.PropTypes.shape({
+		user: PropTypes.PropTypes.object.isRequired
+	}),
+	authedUser: PropTypes.string,
 	voteForOption: PropTypes.func.isRequired,
-	onPollAnswered: PropTypes.func.isRequired,
+	onPollAnswered: PropTypes.func,
 	history: PropTypes.object.isRequired,
-	viewMode: PropTypes.object.isRequired
+	isPreview: PropTypes.bool
 };
 
 function mapDispatchToProps(dispatch) {

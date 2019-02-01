@@ -16,13 +16,14 @@ describe("Poll", () => {
 			text: "have horrible long term memory"
 		}
 	};
+	poll.user = { id: "sarahedo", name: "sarahedo" };
+
 	const history = { push: () => {} };
-	const authedUser = { id: "sarahedo" };
 	const voteForOption = () => {};
 	const onPollAnswered = () => {};
-	const viewMode = {};
+	let authedUser = "johndoe";
 
-	it("Render Poll without crashing", () => {
+	it("Render unanswered Poll without crashing", () => {
 		const renderer = new ShallowRenderer();
 		renderer.render(
 			<Poll
@@ -31,7 +32,23 @@ describe("Poll", () => {
 				authedUser={authedUser}
 				voteForOption={voteForOption}
 				onPollAnswered={onPollAnswered}
-				viewMode={viewMode}
+				isPreview={false}
+			/>
+		);
+		const tree = renderer.getRenderOutput();
+		expect(tree).toMatchSnapshot();
+	});
+
+	it("Render answered Poll without crashing", () => {
+		const renderer = new ShallowRenderer();
+		renderer.render(
+			<Poll
+				poll={poll}
+				history={history}
+				authedUser={"sarahedo"}
+				voteForOption={voteForOption}
+				onPollAnswered={onPollAnswered}
+				isPreview={true}
 			/>
 		);
 		const tree = renderer.getRenderOutput();

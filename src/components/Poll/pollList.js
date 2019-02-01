@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Poll, { PollViewMode } from "./poll";
+import Poll from "./poll";
 import "./pollList.scss";
 import { switchTab } from "../../actions/shared";
 import PropTypes from "prop-types";
@@ -17,9 +17,9 @@ export class PollList extends Component {
 
 	getFilteredPolls = tab => {
 		const userId = this.props.authedUser.id;
-		const polls = Object.keys(this.props.polls).map(
-			k => this.props.polls[k]
-		);
+		const polls = Object.keys(this.props.polls)
+			.map(k => this.props.polls[k])
+			.sort((a, b) => b.timestamp - a.timestamp);
 		switch (tab) {
 			case "unanswered":
 				return polls.filter(
@@ -69,10 +69,8 @@ export class PollList extends Component {
 				</div>
 				{polls.map(poll => (
 					<Poll
-						viewMode={
-							ui.selectedTab === "answered" &&
-							PollViewMode.Preview
-						}
+						history={this.props.history}
+						isPreview={ui.selectedTab === "answered"}
 						key={poll.id}
 						poll={{ ...poll, user: users[poll.author] }}
 						onPollAnswered={this.handlePollAnswered}

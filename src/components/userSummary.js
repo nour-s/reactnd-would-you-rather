@@ -11,7 +11,7 @@ const UserSummary = ({
 );
 
 UserSummary.propTypes = {
-	user: PropTypes.object.isRequired
+	user: PropTypes.object
 };
 
 export default UserSummary;

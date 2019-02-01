@@ -60,6 +60,7 @@ export class App extends Component {
 													.author
 											]
 									}}
+									history={props.history}
 								/>
 							) : null
 						}

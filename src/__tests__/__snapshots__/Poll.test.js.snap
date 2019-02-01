@@ -1,6 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Poll Render Poll without crashing 1`] = `
+exports[`Poll Render answered Poll without crashing 1`] = `
+<div
+  className="poll poll--preview "
+  onClick={[Function]}
+>
+  <h2>
+    Would you rather
+  </h2>
+  <div
+    className="poll_author"
+  >
+    <UserSummary
+      user={
+        Object {
+          "id": "sarahedo",
+          "name": "sarahedo",
+        }
+      }
+    />
+  </div>
+  <div
+    className="poll_details"
+  >
+    <React.Fragment>
+      <div
+        className="answer selected"
+      >
+        <div
+          className="answer_text"
+        >
+          have horrible short term memory
+        </div>
+        <div
+          className="answer_details"
+        >
+          1
+           Votes
+           
+          100
+           %
+        </div>
+      </div>
+      <div
+        className="answer "
+      >
+        <div
+          className="answer_text"
+        >
+          have horrible long term memory
+        </div>
+        <div
+          className="answer_details"
+        >
+          0
+           Votes
+           
+          0
+           %
+        </div>
+      </div>
+    </React.Fragment>
+  </div>
+</div>
+`;
+
+exports[`Poll Render unanswered Poll without crashing 1`] = `
 <div
   className="poll  "
   onClick={null}
@@ -11,7 +76,14 @@ exports[`Poll Render Poll without crashing 1`] = `
   <div
     className="poll_author"
   >
-    <UserSummary />
+    <UserSummary
+      user={
+        Object {
+          "id": "sarahedo",
+          "name": "sarahedo",
+        }
+      }
+    />
   </div>
   <div
     className="poll_details"
