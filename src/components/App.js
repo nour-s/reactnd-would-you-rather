@@ -11,7 +11,7 @@ import Nav from "./Nav";
 import Login from "../components/login";
 import UserSummary from "./userSummary";
 
-class App extends Component {
+export class App extends Component {
 	componentDidMount() {
 		this.props.dispatch(handleInitialData());
 	}
