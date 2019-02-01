@@ -10,6 +10,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import Nav from "./Nav";
 import Login from "../components/login";
 import UserSummary from "./userSummary";
+import NotFound from "./NotFound";
 
 export class App extends Component {
 	componentDidMount() {
@@ -62,7 +63,9 @@ export class App extends Component {
 									}}
 									history={props.history}
 								/>
-							) : null
+							) : (
+								<NotFound />
+							)
 						}
 					/>
 					<PrivateRoute
