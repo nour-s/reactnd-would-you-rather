@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addNewPoll } from "../../actions/shared";
 import "./createPoll.scss";
+import PropTypes from "prop-types";
 
-class CreatePoll extends Component {
+export class CreatePoll extends Component {
 	state = {
 		poll: { optionOneText: "", optionTwoText: "" }
 	};
@@ -54,6 +55,11 @@ class CreatePoll extends Component {
 		);
 	}
 }
+
+CreatePoll.propTypes = {
+	addNewPoll: PropTypes.func.isRequired,
+	history: PropTypes.object.isRequired
+};
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({ addNewPoll }, dispatch);

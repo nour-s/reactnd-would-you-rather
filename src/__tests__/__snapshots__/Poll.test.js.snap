@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poll Render Poll without crashing 1`] = `
+<div
+  className="poll  "
+  onClick={null}
+>
+  <h2>
+    Would you rather
+  </h2>
+  <div
+    className="poll_author"
+  >
+    <UserSummary />
+  </div>
+  <div
+    className="poll_details"
+  >
+    <React.Fragment>
+      <button
+        className="answer"
+        disabled={false}
+        onClick={[Function]}
+      >
+        have horrible short term memory
+      </button>
+      <button
+        className="answer"
+        disabled={false}
+        onClick={[Function]}
+      >
+        have horrible long term memory
+      </button>
+    </React.Fragment>
+  </div>
+</div>
+`;

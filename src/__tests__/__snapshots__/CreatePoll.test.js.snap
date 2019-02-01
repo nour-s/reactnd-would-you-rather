@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePoll Render CreatePoll without crashing 1`] = `
+<div
+  className="create-poll"
+>
+  <h1
+    className="create-poll_title"
+  >
+    New Question
+  </h1>
+  <h3
+    className="create-poll_subtitle"
+  >
+    Would you rather:
+  </h3>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      id="optionOne"
+      onChange={[Function]}
+      placeholder="Enter your option one text"
+      value=""
+    />
+    <hr
+      className="hr-text"
+      data-content="OR"
+    />
+    <input
+      id="optionTwo"
+      onChange={[Function]}
+      placeholder="Enter your option two text"
+      value=""
+    />
+    <br />
+    <button
+      className="create-poll_submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

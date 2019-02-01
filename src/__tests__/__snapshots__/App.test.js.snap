@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders without crashing 1`] = `
+<BrowserRouter>
+  <div
+    className="app"
+  >
+    <header>
+      <Nav />
+    </header>
+    <withRouter(Connect(PrivateRoute))
+      component={[Function]}
+      exact={true}
+      path="/add"
+    />
+    <withRouter(Connect(PrivateRoute))
+      path="/questions/:id"
+      render={[Function]}
+    />
+    <withRouter(Connect(PrivateRoute))
+      component={[Function]}
+      exact={true}
+      path="/leaderboard"
+    />
+    <withRouter(Connect(PrivateRoute))
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/login"
+    />
+  </div>
+</BrowserRouter>
+`;

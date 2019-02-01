@@ -5,8 +5,9 @@ import { bindActionCreators } from "redux";
 import { setAuthedUser } from "../actions/shared";
 import UserSummary from "../components/userSummary";
 import "./login.scss";
+import PropTypes from "prop-types";
 
-class Login extends Component {
+export class Login extends Component {
 	state = {
 		selectedUserId: "",
 		showError: false,
@@ -73,6 +74,14 @@ class Login extends Component {
 		);
 	}
 }
+
+Login.propTypes = {
+	location: PropTypes.shape({
+		state: PropTypes.object
+	}).isRequired,
+	users: PropTypes.object,
+	setAuthedUser: PropTypes.func.isRequired
+};
 
 const mapStateToProps = ({ authedUser, users }) => ({
 	authedUser,

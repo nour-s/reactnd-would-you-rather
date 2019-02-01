@@ -4,8 +4,9 @@ import { bindActionCreators } from "redux";
 import Poll, { PollViewMode } from "./poll";
 import "./pollList.scss";
 import { switchTab } from "../../actions/shared";
+import PropTypes from "prop-types";
 
-class PollList extends Component {
+export class PollList extends Component {
 	state = {
 		newAnswer: false
 	};
@@ -68,7 +69,6 @@ class PollList extends Component {
 				</div>
 				{polls.map(poll => (
 					<Poll
-						{...this.props}
 						viewMode={
 							ui.selectedTab === "answered" &&
 							PollViewMode.Preview
@@ -82,6 +82,14 @@ class PollList extends Component {
 		);
 	}
 }
+
+PollList.propTypes = {
+	polls: PropTypes.object,
+	authedUser: PropTypes.shape({
+		id: PropTypes.string
+	}),
+	switchTab: PropTypes.func
+};
 
 const mapStateToProps = state => state;
 

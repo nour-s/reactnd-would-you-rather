@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Render Login without crashing 1`] = `
+<div
+  className="login"
+>
+  <h1
+    className="login_title"
+  >
+    Login
+  </h1>
+  <UserSummary />
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="login_select-wrapper"
+    >
+      <select
+        className="login_select"
+        onChange={[Function]}
+        value=""
+      >
+        <option />
+        <option
+          value="tylermcginnis"
+        >
+          Tyler McGinnis
+        </option>
+        <option
+          value="johndoe"
+        >
+          John Doe
+        </option>
+      </select>
+    </div>
+    <button
+      className="login_submit"
+    >
+      Login
+    </button>
+  </form>
+</div>
+`;

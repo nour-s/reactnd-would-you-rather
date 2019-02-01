@@ -1,8 +1,8 @@
 import React from "react";
-import { shallow } from "enzyme";
-import ReactDOM from "react-dom";
 import { App } from "../components/App";
 import { MemoryRouter } from "react-router";
+import renderer from "react-test-renderer";
+import ShallowRenderer from "react-test-renderer/shallow";
 
 describe("App component", () => {
 	it("renders without crashing", () => {
@@ -13,12 +13,10 @@ describe("App component", () => {
 			polls: {}
 		};
 
-		shallow(
-			<MemoryRouter initialEntries={["/", "/add"]} initialIndex={0}>
-				<App {...props} />
-			</MemoryRouter>,
-			div
-		);
-		ReactDOM.unmountComponentAtNode(div);
+		const comp = <App {...props} />;
+		const renderer = new ShallowRenderer();
+		renderer.render(comp);
+		const tree = renderer.getRenderOutput();
+		expect(tree).toMatchSnapshot();
 	});
 });

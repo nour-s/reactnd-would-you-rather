@@ -3,15 +3,15 @@ import "./poll.scss";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { voteForOption } from "../../actions/shared";
-import { Link } from "react-router-dom";
 import UserSummary from "../userSummary";
+import PropTypes from "prop-types";
 
 export const PollViewMode = {
 	Preview: 0,
 	Normal: 1
 };
 
-class Poll extends Component {
+export class Poll extends Component {
 	constructor(props) {
 		super(props);
 		const { poll, authedUser } = props;
@@ -116,6 +116,17 @@ class Poll extends Component {
 		);
 	}
 }
+
+Poll.propTypes = {
+	poll: PropTypes.object.isRequired,
+	authedUser: PropTypes.shape({
+		id: PropTypes.string
+	}).isRequired,
+	voteForOption: PropTypes.func.isRequired,
+	onPollAnswered: PropTypes.func.isRequired,
+	history: PropTypes.object.isRequired,
+	viewMode: PropTypes.object.isRequired
+};
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({ voteForOption }, dispatch);

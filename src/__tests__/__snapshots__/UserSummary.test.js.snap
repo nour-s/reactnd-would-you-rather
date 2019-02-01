@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserSummary Render UserSummary without crashing 1`] = `
+<div
+  className="author-info"
+>
+  <img
+    alt="avatar"
+    src="../../images/tyler.jpg"
+  />
+  <span>
+    Tyler McGinnis
+  </span>
+</div>
+`;

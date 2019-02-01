@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poll Render Poll with the tab 'answered' selected 1`] = `
+<div
+  className="pollList"
+>
+  <div
+    className="tab-selector"
+  >
+    <button
+      className=""
+      onClick={[Function]}
+    >
+      Unanswered
+    </button>
+    <button
+      className=" selected "
+      onClick={[Function]}
+    >
+      Answered
+    </button>
+  </div>
+  <Connect(Poll)
+    onPollAnswered={[Function]}
+    poll={
+      Object {
+        "author": "sarahedo",
+        "id": "8xf0y6ziyjabvozdd253nd",
+        "optionOne": Object {
+          "text": "have horrible short term memory",
+          "votes": Array [
+            "sarahedo",
+          ],
+        },
+        "optionTwo": Object {
+          "text": "have horrible long term memory",
+          "votes": Array [],
+        },
+        "timestamp": 1467166872634,
+        "user": Object {
+          "answers": Object {
+            "6ni6ok3ym7mf1p33lnez": "optionOne",
+            "8xf0y6ziyjabvozdd253nd": "optionOne",
+            "am8ehyc8byjqgar0jgpub9": "optionTwo",
+            "loxhs1bqm25b708cmbf3g": "optionTwo",
+          },
+          "avatarURL": "../../images/snow.jpg",
+          "id": "sarahedo",
+          "name": "Sarah Edo",
+          "questions": Array [
+            "8xf0y6ziyjabvozdd253nd",
+            "am8ehyc8byjqgar0jgpub9",
+          ],
+        },
+      }
+    }
+    viewMode={0}
+  />
+</div>
+`;
+
+exports[`Poll Render Poll with the tab 'unanswered' selected 1`] = `
+<div
+  className="pollList"
+>
+  <div
+    className="tab-selector"
+  >
+    <button
+      className="selected"
+      onClick={[Function]}
+    >
+      Unanswered
+    </button>
+    <button
+      className="  "
+      onClick={[Function]}
+    >
+      Answered
+    </button>
+  </div>
+  <Connect(Poll)
+    onPollAnswered={[Function]}
+    poll={
+      Object {
+        "author": "tylermcginnis",
+        "id": "vthrdm985a262al8qx3do",
+        "optionOne": Object {
+          "text": "find $50 yourself",
+          "votes": Array [
+            "tylermcginnis",
+          ],
+        },
+        "optionTwo": Object {
+          "text": "have your best friend find $500",
+          "votes": Array [
+            "johndoe",
+          ],
+        },
+        "timestamp": 1489579767190,
+        "user": undefined,
+      }
+    }
+    viewMode={false}
+  />
+</div>
+`;

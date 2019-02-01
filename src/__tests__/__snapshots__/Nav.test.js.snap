@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav Render Nav without crashing 1`] = `
+<React.Fragment>
+  <nav
+    className="nav"
+  >
+    <ul>
+      <li>
+        <NavLink
+          activeClassName="active"
+          aria-current="page"
+          exact={true}
+          to="/"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          activeClassName="active"
+          aria-current="page"
+          exact={true}
+          to="/add"
+        >
+          New Question
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          activeClassName="active"
+          aria-current="page"
+          exact={true}
+          to="/leaderboard"
+        >
+          Leader Board
+        </NavLink>
+      </li>
+    </ul>
+  </nav>
+</React.Fragment>
+`;
