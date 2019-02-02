@@ -1,4 +1,4 @@
-## Would you rather.
+## Would you rather:
 
 The project is a game where users answeres "Would you rather" questions with only two options.
 The users can also add their own questions so others can answer them too.
