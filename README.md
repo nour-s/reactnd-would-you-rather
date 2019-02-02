@@ -1,6 +1,6 @@
 ## Would you rather:
 
-The project is a game where users answeres "Would you rather" questions with only two options.
+The project is a game where users answer "Would you rather" questions with only two options.
 The users can also add their own questions so others can answer them too.
 There is a leader board that shows the ranking of all users. The rank is calculated to be the number of questions a user has answered plus the questions he asked.
 The more you answer and ask, the higher rank you get.
