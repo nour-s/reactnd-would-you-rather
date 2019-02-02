@@ -38,10 +38,8 @@ export class PollList extends Component {
 		}
 	};
 
-	handlePollAnswered = () => {
-		this.setState({ newAnswer: true }, () =>
-			setTimeout(() => this.setState({ newAnswer: false }), 1000)
-		);
+	handlePollAnswered = pollId => {
+		this.props.history.push(`/questions/${pollId}`);
 	};
 
 	render() {
@@ -70,7 +68,7 @@ export class PollList extends Component {
 				{polls.map(poll => (
 					<Poll
 						history={this.props.history}
-						isPreview={ui.selectedTab === "answered"}
+						isClickable={ui.selectedTab === "answered"}
 						key={poll.id}
 						poll={{ ...poll, user: users[poll.author] }}
 						onPollAnswered={this.handlePollAnswered}

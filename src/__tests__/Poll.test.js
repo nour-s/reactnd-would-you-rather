@@ -32,7 +32,7 @@ describe("Poll", () => {
 				authedUser={authedUser}
 				voteForOption={voteForOption}
 				onPollAnswered={onPollAnswered}
-				isPreview={false}
+				isClickable={false}
 			/>
 		);
 		const tree = renderer.getRenderOutput();
@@ -48,7 +48,7 @@ describe("Poll", () => {
 				authedUser={"sarahedo"}
 				voteForOption={voteForOption}
 				onPollAnswered={onPollAnswered}
-				isPreview={true}
+				isClickable={true}
 			/>
 		);
 		const tree = renderer.getRenderOutput();

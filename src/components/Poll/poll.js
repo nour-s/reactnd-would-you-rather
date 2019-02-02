@@ -23,19 +23,22 @@ export class Poll extends Component {
 	handleAnswerClick = answer => {
 		const { poll, onPollAnswered } = this.props;
 		answer = ["optionOne", "optionTwo"][answer];
-		this.props.voteForOption({
-			pollId: poll.id,
-			answer
-		});
+		this.props
+			.voteForOption({
+				pollId: poll.id,
+				answer
+			})
+			.then(() => {
+				if (onPollAnswered) {
+					this.props.onPollAnswered(poll.id);
+				}
+			});
 		this.setState({ disabled: true, selectedAnswer: answer });
-		if (onPollAnswered) {
-			this.props.onPollAnswered();
-		}
 	};
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
 		return (
-			<React.Fragment>
+			<Fragment>
 				{isSelectedAnswer ? (
 					<span className="poll_details__label">Your answer:</span>
 				) : null}
@@ -49,7 +52,7 @@ export class Poll extends Component {
 						%
 					</div>
 				</div>
-			</React.Fragment>
+			</Fragment>
 		);
 	};
 
@@ -70,7 +73,8 @@ export class Poll extends Component {
 	};
 
 	render() {
-		const { poll, isPreview } = this.props;
+		// isClickable means the component can be clicked to browse to the vote.
+		const { poll, isClickable } = this.props;
 		const allVotes = [...poll.optionOne.votes, ...poll.optionTwo.votes];
 		const { selectedAnswer } = this.state;
 
@@ -78,10 +82,10 @@ export class Poll extends Component {
 			<div
 				className={[
 					"poll",
-					isPreview ? "poll--preview" : "",
+					isClickable ? "poll--preview" : "",
 					this.state.disabled ? "answered" : ""
 				].join(" ")}
-				onClick={isPreview ? e => this.handlePollClick(e) : null}
+				onClick={isClickable ? e => this.handlePollClick(e) : null}
 			>
 				<h2>Would you rather</h2>
 				<div className="poll_author">
@@ -126,7 +130,7 @@ Poll.propTypes = {
 	voteForOption: PropTypes.func.isRequired,
 	onPollAnswered: PropTypes.func,
 	history: PropTypes.object.isRequired,
-	isPreview: PropTypes.bool
+	isClickable: PropTypes.bool
 };
 
 function mapDispatchToProps(dispatch) {

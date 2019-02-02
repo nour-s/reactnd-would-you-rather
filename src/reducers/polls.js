@@ -5,8 +5,7 @@ function polls(state = {}, action) {
 		case "VOTE_FOR_OPTION":
 			let polls = state;
 			const { question } = action;
-			Object.assign(polls[question.id], question);
-			return { ...polls };
+			return { ...polls, [question.id]: question };
 		case "ADD_NEW_POLL":
 			return { ...state, [action.poll.id]: action.poll };
 		default:

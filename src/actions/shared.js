@@ -1,8 +1,6 @@
 import * as API from "../_DATA";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-// const AUTHED_ID = "tylermcginnis";
-
 function getInitialData() {
 	return Promise.all([API._getUsers(), API._getQuestions()]).then(
 		([users, polls]) => ({
@@ -16,7 +14,6 @@ export function handleInitialData() {
 	return dispatch => {
 		dispatch(showLoading());
 		return getInitialData().then(({ users, polls }) => {
-			// dispatch(setAuthedUser(AUTHED_ID));
 			dispatch(switchTab("unanswered"));
 			dispatch(receiveUsers(users));
 			dispatch(receivePolls(polls));
@@ -59,20 +56,22 @@ export function voteForOption(voteInfo) {
 	return (dispatch, getState) => {
 		const userId = getState().authedUser.id;
 		const { pollId, answer } = voteInfo;
-		API._saveQuestionAnswer({
+		return API._saveQuestionAnswer({
 			authedUser: userId,
 			qid: pollId,
 			answer
 		}).then(() => {
-			Promise.all([API._getUsers(), API._getQuestions()]).then(result => {
-				const user = result[0][userId];
-				const question = result[1][pollId];
-				dispatch({
-					type: "VOTE_FOR_OPTION",
-					user,
-					question
-				});
-			});
+			return Promise.all([API._getUsers(), API._getQuestions()]).then(
+				result => {
+					const user = result[0][userId];
+					const question = result[1][pollId];
+					dispatch({
+						type: "VOTE_FOR_OPTION",
+						user,
+						question
+					});
+				}
+			);
 		});
 	};
 }
@@ -89,5 +88,11 @@ export function addNewPoll({ optionOneText, optionTwoText }) {
 				poll
 			})
 		);
+	};
+}
+
+export function logout() {
+	return dispatch => {
+		dispatch({ type: "SET_AUTHED_USER" });
 	};
 }

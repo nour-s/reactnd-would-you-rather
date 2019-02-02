@@ -21,7 +21,7 @@ exports[`Poll Render Poll with the tab 'answered' selected 1`] = `
     </button>
   </div>
   <Connect(Poll)
-    isPreview={true}
+    isClickable={true}
     onPollAnswered={[Function]}
     poll={
       Object {
@@ -80,7 +80,7 @@ exports[`Poll Render Poll with the tab 'unanswered' selected 1`] = `
     </button>
   </div>
   <Connect(Poll)
-    isPreview={false}
+    isClickable={false}
     onPollAnswered={[Function]}
     poll={
       Object {

@@ -11,7 +11,10 @@ const UserSummary = ({
 );
 
 UserSummary.propTypes = {
-	user: PropTypes.object
+	user: PropTypes.shape({
+		avatarURL: PropTypes.string,
+		name: PropTypes.string
+	})
 };
 
 export default UserSummary;

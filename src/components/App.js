@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { handleInitialData } from "../actions/shared";
+import { handleInitialData, logout } from "../actions/shared";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PollList from "../components/Poll/pollList";
 import Poll from "../components/Poll/poll";
@@ -11,14 +11,15 @@ import Nav from "./Nav";
 import Login from "../components/login";
 import UserSummary from "./userSummary";
 import NotFound from "./NotFound";
+import { bindActionCreators } from "redux";
 
 export class App extends Component {
 	componentDidMount() {
-		this.props.dispatch(handleInitialData());
+		this.props.handleInitialData();
 	}
 
 	handleLogoutClick = e => {
-		this.props.dispatch({ type: "SET_AUTHED_USER" });
+		this.props.logout();
 	};
 
 	userProfile = user => {
@@ -86,4 +87,11 @@ const mapStateToProps = ({ users, polls, authedUser }) => ({
 	polls,
 	authedUser
 });
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch =>
+	bindActionCreators({ logout, handleInitialData }, dispatch);
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
