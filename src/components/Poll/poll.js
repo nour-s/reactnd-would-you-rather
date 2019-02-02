@@ -35,13 +35,21 @@ export class Poll extends Component {
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
 		return (
-			<div className={`answer ${isSelectedAnswer ? "selected" : ""}`}>
-				<div className="answer_text">{vote.text}</div>
-				<div className="answer_details">
-					{vote.votes.length} Votes{" "}
-					{((vote.votes.length * 100) / allVotes.length).toFixed(0)} %
+			<React.Fragment>
+				{isSelectedAnswer ? (
+					<span className="poll_details__label">Your answer:</span>
+				) : null}
+				<div className={`answer ${isSelectedAnswer ? "selected" : ""}`}>
+					<div className="answer_text">{vote.text}</div>
+					<div className="answer_details">
+						{vote.votes.length} Votes{" "}
+						{((vote.votes.length * 100) / allVotes.length).toFixed(
+							0
+						)}
+						%
+					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	};
 
