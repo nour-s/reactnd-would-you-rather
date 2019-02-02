@@ -21,14 +21,16 @@ export class Poll extends Component {
 	}
 
 	handleAnswerClick = answer => {
-		const { poll } = this.props;
+		const { poll, onPollAnswered } = this.props;
 		answer = ["optionOne", "optionTwo"][answer];
 		this.props.voteForOption({
 			pollId: poll.id,
 			answer
 		});
 		this.setState({ disabled: true, selectedAnswer: answer });
-		this.props.onPollAnswered();
+		if (onPollAnswered) {
+			this.props.onPollAnswered();
+		}
 	};
 
 	answerComponent = (allVotes, vote, isSelectedAnswer) => {
