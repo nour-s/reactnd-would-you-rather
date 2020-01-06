@@ -8,6 +8,8 @@ The home page shows a list of questions divided into two tabs: Unanswered and An
 By visiting the Unanswered tab, you can click on the option you want to pick in any question, and the question will be automatically moved to the Answered tab.
 You can share the question by clicking on an answered question, and copy the url that looks something like this: /questions/{questionId}.
 
+![WouldYouRather](https://user-images.githubusercontent.com/1418564/71846850-f76cc980-30e4-11ea-9978-1447c34733d0.gif)
+
 ## Quick Start:
 
 First you need to run `npm install` in the project directory, to install all the required packages.
